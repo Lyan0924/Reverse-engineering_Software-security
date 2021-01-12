@@ -9,6 +9,12 @@
 + API hook：通过hook“接触”到需要修改的API函数入口点，改变它的地址指向新的自定义的函数，以此改变一个系统API的原有功能。、常见的API Hook包括2种， 一种是基于PE文件的导入表(IAT), 还有一种是修改前5个字节直接JMP的inline Hook
 + IAT hook：原理是PE文件里有个导入表， 代表该模块调用了哪些外部API，模块被加载到内存后， PE加载器会修改该表，地址改成外部API重定位后的真实地址， 我们只要直接把里面的地址改成我们新函数的地址， 就可以完成对相应API的Hook
 + notepad在写入文件时使用的是kernelbase模块的writefile函数，所以在进行IAT hook时，只需要将writefile的地址改为新写的函数地址
++ `injectAllTheThings`仓库中总结了七种DLL注入技术，其中CreateRemoteThread()技术的步骤主要有以下几步：
+  1. 使用OpenProcess()函数打开目标进程
+  2. 通过调用GetProAddress()函数找到LoadLibrary()函数的地址
+  3. 通过调用VirtualAllocEx()函数在目标/远程进程地址空间中为DLL文件路径开辟内存空间
+  4. 调用WriteProcessMemory()函数在之前所分配的内存空间中写入DLL文件路径
+  5. 调用CreateRemoteThread()函数创建一个新的线程，新线程以DLL文件路径名称作为参数来调用LoadLibrary()函数
 
 ### 实验过程
 
