@@ -19,7 +19,7 @@
 
   具体使用方法：[Windbg命令脚本](https://www.cnblogs.com/yilang/p/11413230.html)
 
-+ notepad在写入文件时使用的是kernel32模块的writefile函数
++ notepad在写入文件时使用的是kernelbase模块的writefile函数
 
 ### 实验过程
 
